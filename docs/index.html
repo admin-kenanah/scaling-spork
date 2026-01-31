@@ -5,13 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>نظام الوارد</title>
   <style>
-    body { margin:0; background:#f5f7fb; font-family:Segoe UI, Tahoma, Arial, sans-serif; }
-    .header { width:100%; max-width:1400px; margin:0 auto; }
-    .header img { width:100%; height:auto; display:block; }
-    .wrap { max-width:1400px; margin:0 auto; padding:16px; }
-    .card { background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:16px; }
-    .iframe { width:100%; height:1200px; border:0; border-radius:8px; }
-    @media (max-width: 768px) { .iframe { height: 1500px; } }
+    /* اجعل الهيدر والفورم بنفس الحاوية والعرض */
+.header,
+.wrap {
+    width: 100%;
+    max-width: 1400px;   /* نفس القيمة الحالية للهيدر */
+    margin: 0 auto;
+}
+
+/* خلي البطاقة بدون حشوة (padding) عشان الـiframe يكون من الحافة للحافة) */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    padding: 0;          /* كان 16px: أزلناه */
+    border: 0;
+}
+
+/* تأكد أن الـiframe يغطي العرض تمامًا ومابينقصه البوردر */
+.iframe {
+    display: block;
+    width: 100%;
+    height: 1200px;      /* عدّلها كما تريد */
+    border: 0;           /* مهم لعدم ظهور إطار المتصفح */
+    border-radius: 12px; /* يطابق حواف البطاقة لو تحب */
+}
+
+/* مرونة للموبايل */
+@media (max-width: 768px) {
+  .iframe { height: 1500px; }
+}
+
   </style>
 </head>
 <body>
