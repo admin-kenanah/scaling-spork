@@ -3,57 +3,84 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>نظام الوارد</title>
+  <title>نموذج الديوان</title>
+
   <style>
-/* حاوية موحّدة للهيدر والفورم */
-.container {
-  width: 100%;
-  max-width: 760px;   /* عدّلها لـ 700 أو 780 حسب ما تحب */
-  margin: 0 auto;     /* توسيط الحاوية */
-}
+    /* إعدادات عامة */
+    :root{
+      /* عرض موحّد للهيدر والفورم — عدّلها عند اللزوم (720/740/780) */
+      --container-width: 760px;
+      --radius: 12px;
+      --shadow: 0 8px 24px rgba(0,0,0,.08);
+      --page-bg: #f5f7fb;
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      background: var(--page-bg);
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      color:#0f172a;
+      line-height:1.6;
+    }
 
-/* الهيدر */
-.header {
-  margin: 0 auto 16px;     /* توسيط + مسافة أسفل */
-}
-.header img {
-  width: 100%;             /* يمتلئ عرض الحاوية */
-  height: auto;
-  display: block;
-  border-radius: 12px;     /* اختياري للتناسق مع البطاقة */
-}
+    /* الحاوية الموحّدة للهيدر + النموذج (نفس العرض) */
+    .container{
+      width:100%;
+      max-width: var(--container-width);
+      margin:0 auto;
+      padding:16px 12px; /* تقليل هوامش جانبية لزيادة عرض الفورم */
+    }
 
-/* البطاقة التي تحتوي الـ iframe */
-.card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.08);
-  padding: 0;              /* نخلي الفورم من الحافة للحافة */
-  border: 0;
-}
+    /* الهيدر */
+    .header{ margin:0 0 16px 0; }
+    .header img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius: var(--radius);
+    }
 
-/* الإطار المضمَّن للنموذج */
-.iframe {
-  display: block;
-  width: 100%;             /* يمتلئ عرض الحاوية */
-  height: 1500px;          /* عدّلها حسب طول نموذجك */
-  border: 0;
-  border-radius: 12px;     /* يطابق حواف البطاقة */
-}
+    /* بطاقة تحتوي النموذج */
+    .card{
+      background:#fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:0;          /* نخلي الفورم من الحافة للحافة */
+      border:0;
+      overflow:hidden;    /* لقص زوايا الـiframe مع نفس الانحناء */
+    }
 
-/* استجابة للموبايل */
-@media (max-width: 768px) {
-  .iframe { height: 1700px; }
-}  </style>
+    /* النموذج المضمّن — ارفع/خفض الارتفاع لتقليل السكروول */
+    .iframe{
+      display:block;
+      width:100%;
+      height:2050px;      /* جرّب 1950/2000/2150 حسب طول نموذجك */
+      border:0;
+    }
+
+    /* ضبط للموبايل */
+    @media (max-width: 768px){
+      .container{ max-width:100%; padding:12px 8px; }
+      .iframe{ height:2200px; } /* نرفع قليلًا على الشاشات الصغيرة */
+    }
+  </style>
 </head>
+
 <body>
-  <div class="header">
-    <img src="header1.jpg" alt="Header" />
-  </div>
-  <div class="wrap">
-    <div class="card">
-      <iframe class="iframe" src="https://forms.office.com/Pages/ResponsePage.aspx?id=74DPoTo7akGXBALjKbXILpUvXxpvwExMmUTB_IeL7rNURUNZMDVSVkJVNDkzSFRCMkk3REtMNzVKMiQlQCN0PWcu" allowfullscreen></iframe>
+
+  <div class="container">
+
+    <!-- الهيدر (نفس عرض النموذج) -->
+    <div class="header">
+      header1.jpg
     </div>
+
+    <!-- النموذج (نفس عرض الهيدر) -->
+    <div class="card">
+      https://forms.office.com/Pages/ResponsePage.aspx?id=74DPoTo7akGXBALjKbXILpUvXxpvwExMmUTB_IeL7rNURUNZMDVSVkJVNDkzSFRCMkk3REtMNzVKMiQlQCN0PWcu&embed=true</iframe>
+    </div>
+
   </div>
+
 </body>
 </html>
