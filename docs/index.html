@@ -12,7 +12,14 @@
       --radius: 12px;
       --shadow: 0 8px 24px rgba(0,0,0,.08);
       --page-bg: #f5f7fb;
+
+      /* ارتفاع النموذج داخل الإطار */
+      --form-height-desktop: 2000px; /* جرّب 1950/2000/2050 بحسب طول نموذجك */
+      --form-height-mobile: 2200px;  /* للموبايل */
+      /* ارتفاع الغطاء الذي يغطي التذييل داخل الإطار */
+      --footer-cover: 110px; /* زِده/قلّله حتى يختفي التذييل بالكامل */
     }
+
     *{ box-sizing: border-box; }
     body{
       margin:0;
@@ -27,7 +34,7 @@
       width:100%;
       max-width: var(--container-width);
       margin:0 auto;
-      padding:16px 12px; /* تقليل الهوامش الجانبية لزيادة عرض الفورم */
+      padding:16px 12px;
     }
 
     /* الهيدر */
@@ -41,26 +48,45 @@
 
     /* بطاقة تحتوي النموذج */
     .card{
+      position: relative;  /* ضرورية للـ overlay */
       background:#fff;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding:0;          /* نخلي الفورم من الحافة للحافة */
+      padding:0;
       border:0;
-      overflow:hidden;    /* لقص زوايا الـiframe مع نفس الانحناء */
+      overflow:hidden;     /* لقص زوايا الـiframe مع نفس الانحناء */
     }
 
-    /* النموذج المضمّن — ارفع/خفض الارتفاع لتقليل السكروول */
+    /* النموذج المضمّن — اضبط الارتفاع لتقليل السكروول */
     .iframe{
       display:block;
       width:100%;
-      height:2050px;      /* جرّب 1950/2000/2150 حسب طول نموذجك */
+      height: var(--form-height-desktop);
       border:0;
+    }
+
+    /*
+      غطاء (Overlay) في أسفل البطاقة يغطي تذييل Microsoft Forms
+      هذا لا يغيّر محتوى الـ iframe، فقط يخفيه بصريًا.
+    */
+    .card::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height: var(--footer-cover);
+      /* خلفية مطابقة لبطاقة النموذج (أبيض) مع تدرّج بسيط للأناقة */
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.85) 35%, #ffffff 100%);
+      pointer-events:none; /* لا يعطّل الضغط على زر الإرسال إن ظهر فوقه */
     }
 
     /* ضبط للموبايل */
     @media (max-width: 768px){
       .container{ max-width:100%; padding:12px 8px; }
-      .iframe{ height:2200px; } /* نرفع قليلًا على الشاشات الصغيرة */
+      .iframe{ height: var(--form-height-mobile); }
+      .card::after{ height: calc(var(--footer-cover) + 10px); }
     }
   </style>
 </head>
@@ -79,9 +105,6 @@
       <iframe
         class="iframe"
         src="https://forms.office.com/Pages/ResponsePage.aspx?id=74DPoTo7akGXBALjKbXILpUvXxpvwExMmUTB_IeL7rNURUNZMDVSVkJVNDkzSFRCMkk3REtMNzVKMiQlQCN0PWcu&embed=true"
-        frameborder="1"
-        marginheight="1"
-        marginwidth="1"
         allowfullscreen
       ></iframe>
     </div>
