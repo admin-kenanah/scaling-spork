@@ -5,24 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>نظام الوارد</title>
   <style>
-.header,
-.wrap {
-    width: 100%;
-    max-width: none;   /* أو احذف max-width كليًا */
-    margin: 0;         /* لا مركزية */
+/* حاوية موحّدة للهيدر والفورم */
+.container {
+  width: 100%;
+  max-width: 760px;   /* عدّلها لـ 700 أو 780 حسب ما تحب */
+  margin: 0 auto;     /* توسيط الحاوية */
 }
 
+/* الهيدر */
+.header {
+  margin: 0 auto 16px;     /* توسيط + مسافة أسفل */
+}
+.header img {
+  width: 100%;             /* يمتلئ عرض الحاوية */
+  height: auto;
+  display: block;
+  border-radius: 12px;     /* اختياري للتناسق مع البطاقة */
+}
+
+/* البطاقة التي تحتوي الـ iframe */
 .card {
-    padding: 0;
-    border-radius: 0;         /* لإلغاء الزوايا إذا بدك full-bleed حقيقي */
-    box-shadow: none;         /* عادةً بالـfull-bleed نلغي الظل */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  padding: 0;              /* نخلي الفورم من الحافة للحافة */
+  border: 0;
 }
 
+/* الإطار المضمَّن للنموذج */
 .iframe {
-    width: 100%;
-    height: 1200px;
-    border: 0;
-    border-radius: 0;
+  display: block;
+  width: 100%;             /* يمتلئ عرض الحاوية */
+  height: 1500px;          /* عدّلها حسب طول نموذجك */
+  border: 0;
+  border-radius: 12px;     /* يطابق حواف البطاقة */
+}
+
+/* استجابة للموبايل */
+@media (max-width: 768px) {
+  .iframe { height: 1700px; }
 }  </style>
 </head>
 <body>
